@@ -1,8 +1,10 @@
 name: Deploy website
+
 on:
   push:
     branches:
       - main
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -15,6 +17,7 @@ jobs:
         run: npm run lint
       - name: Test code
         run: npm run test
+
   build:
     needs: test
     runs-on: ubuntu-latest
@@ -32,13 +35,16 @@ jobs:
           path: |
             dist
             package.json # not needed, only used as an example
+
   deploy:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Download artifacts
+      - name: Get build artifacts
         uses: actions/download-artifact@v4
         with:
           name: my-artifact
+      - name: Output contents
+        run: ls # list contents of current directory
       - name: Deploy
         run: echo "Deploying..."
