@@ -43,4 +43,13 @@ export default [
       },
     },
   },
+  // Add this configuration to ensure test setup files are covered
+  {
+    files: ["src/test/**/*.{js,jsx}"],
+    languageOptions: {
+      globals: {
+        ...globals.jest,
+      },
+    },
+  },
 ];
